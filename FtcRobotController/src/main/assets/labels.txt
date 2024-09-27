@@ -1,0 +1,3 @@
+0 CenterRed
+1 LeftRed
+2 RightRed
