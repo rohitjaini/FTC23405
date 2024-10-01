@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c797b521-71da-462c-bb1f-ab92b6bc17e9" name="Changes" comment="test changes">
+    <list default="true" id="c797b521-71da-462c-bb1f-ab92b6bc17e9" name="Changes" comment="LM0 Code - need to test.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/kdrobot/KDRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/kdrobot/KDRobot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleop/CORobotCodeV6.java" beforeDir="false" afterPath="$PROJECT_DIR$/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/teleop/CORobotCodeV6.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +78,8 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "ritvik/changes",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ritvi/StudioProjects/FTC23405"
+    "last_opened_file_path": "C:/Users/ritvi/StudioProjects/FTC23405",
+    "settings.editor.selected.configurable": "editor.preferences.tabs"
   }
 }]]></component>
   <component name="RunManager" selected="Android App.TeamCode">
@@ -231,11 +233,20 @@
       <option name="project" value="LOCAL" />
       <updated>1727409118477</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="LM0 Code - need to test.">
+      <option name="closed" value="true" />
+      <created>1727746830783</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727746830783</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="test changes" />
+    <MESSAGE value="LM0 Code - need to test." />
+    <option name="LAST_COMMIT_MESSAGE" value="LM0 Code - need to test." />
   </component>
 </project>
