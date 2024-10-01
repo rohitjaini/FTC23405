@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
-public class CORobotCodeV6 extends LinearOpMode {
+public class CORobotCodeLM0_V1 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // Declare our motors
@@ -99,54 +99,54 @@ public class CORobotCodeV6 extends LinearOpMode {
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
 //Linear Slide movement
-                if (gamepad2.b) {
-                    rightSlideMotor.setTargetPosition(3764);
-                    leftSlideMotor.setTargetPosition(3764);
-                    if (gamepad2.a) {
-                        rightSlideMotor.setTargetPosition(0);
-                        leftSlideMotor.setTargetPosition(0);
-                        // Linear Slide movement End
+            if (gamepad2.b) {
+                rightSlideMotor.setTargetPosition(3764);
+                leftSlideMotor.setTargetPosition(3764);
+                if (gamepad2.a) {
+                    rightSlideMotor.setTargetPosition(0);
+                    leftSlideMotor.setTargetPosition(0);
+                    // Linear Slide movement End
 
-                            if (gamepad1.left_trigger == 1) {
-                                telemetry.addLine("lefttrigger pressed");
-                                rightClawServo.setPosition(1);
-                                leftClawServo.setPosition(1);
-                            if (gamepad1.right_trigger == 1) {
-                                telemetry.addLine("righttrigger pressed");
-                                rightClawServo.setPosition(0);
-                                leftClawServo.setPosition(0);
+                    if (gamepad1.left_trigger == 1) {
+                        telemetry.addLine("lefttrigger pressed");
+                        rightClawServo.setPosition(1);
+                        leftClawServo.setPosition(1);
+                        if (gamepad1.right_trigger == 1) {
+                            telemetry.addLine("righttrigger pressed");
+                            rightClawServo.setPosition(0);
+                            leftClawServo.setPosition(0);
 
-                                        if (gamepad2.x) {
-                                            telemetry.addLine("x pressed");
-                                            rightWristServo.setPosition(-0.25);
-                                            leftWristServo.setPosition(-0.25);
-                                            sleep(200);
-                                            intakeArmMotor.setTargetPosition(-134);
+                            if (gamepad2.x) {
+                                telemetry.addLine("x pressed");
+                                rightWristServo.setPosition(-0.25);
+                                leftWristServo.setPosition(-0.25);
+                                sleep(200);
+                                intakeArmMotor.setTargetPosition(-134);
 
 
-                                            if (gamepad2.a) {
-                                                telemetry.addLine("a pressed");
-                                                intakeArmMotor.setTargetPosition(0);
-                                                sleep(200);
-                                                rightWristServo.setPosition(0.25);
-                                                leftWristServo.setPosition(0.25);
+                                if (gamepad2.a) {
+                                    telemetry.addLine("a pressed");
+                                    intakeArmMotor.setTargetPosition(0);
+                                    sleep(200);
+                                    rightWristServo.setPosition(0.25);
+                                    leftWristServo.setPosition(0.25);
 
-                                                if (gamepad1.y) {
-                                                    telemetry.addLine("y pressed");
-                                                    bucketServo.setPosition(-0.5);
-                                                }
+                                    if (gamepad1.y) {
+                                        telemetry.addLine("y pressed");
+                                        bucketServo.setPosition(-0.5);
+                                    }
 
-                                                if (gamepad1.b) {
-                                                    telemetry.addLine("b pressed");
-                                                    bucketServo.setPosition(0);
-                                                }
-                                        }
+                                    if (gamepad1.b) {
+                                        telemetry.addLine("b pressed");
+                                        bucketServo.setPosition(0);
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
 
 
 
@@ -156,5 +156,5 @@ public class CORobotCodeV6 extends LinearOpMode {
 
 
 
-                        }
-                    }
+    }
+}
