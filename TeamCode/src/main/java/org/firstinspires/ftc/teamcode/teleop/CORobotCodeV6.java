@@ -25,16 +25,16 @@ public class CORobotCodeV6 extends LinearOpMode {
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeft");
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRight");
         DcMotor backRightMotor = hardwareMap.dcMotor.get("backRight");
-        DcMotor rightLinearSlide = hardwareMap.get(DcMotor.class, "RightLS");
-        DcMotor leftLinearSlide = hardwareMap.get(DcMotor.class, "LeftLS");
-        Servo armHingeOne = hardwareMap.get(Servo.class, "aHO");
-        Servo armHingeTwo = hardwareMap.get(Servo.class, "aHT");
-        Servo clawOne = hardwareMap.get(Servo.class, "cO");
-        Servo clawTwo = hardwareMap.get(Servo.class, "cT");
-        DcMotor armBase = hardwareMap.get(DcMotor.class, "aB");
-        armBase.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftLinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightLinearSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "RightLS");
+        DcMotor leftSlideMotor = hardwareMap.get(DcMotor.class, "LeftLS");
+        Servo rightWristServo = hardwareMap.get(Servo.class, "aHO");
+        Servo leftWristServo = hardwareMap.get(Servo.class, "aHT");
+        Servo rightClawServo = hardwareMap.get(Servo.class, "cO");
+        Servo leftClawServo = hardwareMap.get(Servo.class, "cT");
+        DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "aB");
+        intakeArmMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlideMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Reverse the right side motors. This may be wrong for your setup.
         // If your robot moves backwards when commanded to go forwards,
@@ -86,21 +86,19 @@ public class CORobotCodeV6 extends LinearOpMode {
             double backLeftPower = (rotY - rotX + rx) / denominator;
             double frontRightPower = (rotY - rotX - rx) / denominator;
             double backRightPower = (rotY + rotX - rx) / denominator;
+            double driveTrainSpeed = 0.1;
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
 //Linear Slide movement
-            if (gamepad2.x) {
-                rightLinearSlide.setPower(1);
-                leftLinearSlide.setPower(1);
                 if (gamepad2.b) {
-                    rightLinearSlide.setTargetPosition(1);
-                    leftLinearSlide.setTargetPosition(1);
+                    rightSlideMotor.setTargetPosition(1);
+                    leftSlideMotor.setTargetPosition(1);
                     if (gamepad2.a) {
-                        rightLinearSlide.setTargetPosition(0);
-                        leftLinearSlide.setTargetPosition(0);
+                        rightSlideMotor.setTargetPosition(0);
+                        leftSlideMotor.setTargetPosition(0);
                         // Linear Slide movement End
 
                         if (gamepad1.right_bumper) {
@@ -110,26 +108,25 @@ public class CORobotCodeV6 extends LinearOpMode {
                         if (gamepad1.left_bumper) {
                             sleep(250);
                             robot.changeDriveTrainSpeed(DriveTrainSpeed.DECREASE);
-                if (gamepad1.y) {
-                    armBase.setTargetPosition(0);
-                    if (gamepad1.a) {
-                        armBase.setTargetPosition(-1);
 
-                        if (gamepad1.left_trigger == 1) {
-                            clawOne.setPosition(1);
-                            clawTwo.setPosition(1);
+                            if (gamepad1.left_trigger == 1) {
+                                rightClawServo.setPosition(1);
+                                leftClawServo.setPosition(1);
                             if (gamepad1.right_trigger == 1) {
-                                clawOne.setPosition(0);
-                                clawTwo.setPosition(0);
+                                rightClawServo.setPosition(0);
+                                leftClawServo.setPosition(0);
 
-                                if (gamepad1.x) {
-                                    armHingeOne.setPosition(-0.5);
-                                    armHingeTwo.setPosition(-0.5);
-                                    if (gamepad1.a) {
-                                        armHingeOne.setPosition(1);
-                                        armHingeTwo.setPosition(1);
-                                        if (gamepad1.y) {
-                                            armBase.setTargetPosition(0);
+                                        if (gamepad1.x) {
+                                            intakeArmMotor.setTargetPosition(-1);
+                                            sleep(200);
+                                            rightWristServo.setPosition(-0.5);
+                                            leftWristServo.setPosition(-0.5);
+
+                                            if (gamepad1.a) {
+                                                intakeArmMotor.setTargetPosition(0);
+                                                rightWristServo.setPosition(1);
+                                                leftWristServo.setPosition(1);
+
                                         }
                                     }
                                 }
