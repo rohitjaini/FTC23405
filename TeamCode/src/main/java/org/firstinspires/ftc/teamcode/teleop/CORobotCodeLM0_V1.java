@@ -29,9 +29,18 @@ public class CORobotCodeLM0_V1 extends LinearOpMode {
         Servo leftClawServo = hardwareMap.get(Servo.class, "leftClawServo");
         DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "intakeArmMotor");
         Servo bucketServo = hardwareMap.get(Servo.class, "bucketServo");
-        intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+       // intakeArmMotor.setTargetPosition(0);
+        //leftSlideMotor.setTargetPosition(0);
+        rightSlideMotor.setTargetPosition(0);
+       // intakeArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //intakeArmMotor.setPower(0.3);
+        //leftSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //leftSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //leftSlideMotor.setPower(0.75);
+        rightSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightSlideMotor.setPower(0.75);
 
         // Reverse the right side motors. This may be wrong for your setup.
         // If your robot moves backwards when commanded to go for   wards,
@@ -59,9 +68,6 @@ public class CORobotCodeLM0_V1 extends LinearOpMode {
 
         waitForStart();
 
-        intakeArmMotor.setTargetPosition(0);
-        leftSlideMotor.setTargetPosition(0);
-        rightSlideMotor.setTargetPosition(0);
 
         if (isStopRequested()) return;
 
@@ -99,62 +105,42 @@ public class CORobotCodeLM0_V1 extends LinearOpMode {
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
 //Linear Slide movement
-            if (gamepad2.b) {
-                rightSlideMotor.setTargetPosition(3764);
-                leftSlideMotor.setTargetPosition(3764);
-                if (gamepad2.a) {
-                    rightSlideMotor.setTargetPosition(0);
-                    leftSlideMotor.setTargetPosition(0);
-                    // Linear Slide movement End
-
-                    if (gamepad1.left_trigger == 1) {
-                        telemetry.addLine("lefttrigger pressed");
-                        rightClawServo.setPosition(1);
-                        leftClawServo.setPosition(1);
-                        if (gamepad1.right_trigger == 1) {
-                            telemetry.addLine("righttrigger pressed");
-                            rightClawServo.setPosition(0);
-                            leftClawServo.setPosition(0);
-
-                            if (gamepad2.x) {
-                                telemetry.addLine("x pressed");
-                                rightWristServo.setPosition(-0.25);
-                                leftWristServo.setPosition(-0.25);
-                                sleep(200);
-                                intakeArmMotor.setTargetPosition(-134);
-
-
-                                if (gamepad2.a) {
-                                    telemetry.addLine("a pressed");
-                                    intakeArmMotor.setTargetPosition(0);
-                                    sleep(200);
-                                    rightWristServo.setPosition(0.25);
-                                    leftWristServo.setPosition(0.25);
-
-                                    if (gamepad1.y) {
-                                        telemetry.addLine("y pressed");
-                                        bucketServo.setPosition(-0.5);
-                                    }
-
-                                    if (gamepad1.b) {
-                                        telemetry.addLine("b pressed");
-                                        bucketServo.setPosition(0);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            //if (gamepad2.y) {
+                //sleep(2000);
+                //rightWristServo.setPosition(0.8);
+                //leftWristServo.setPosition(0.8);
+               // sleep(2000);
+               // intakeArmMotor.setTargetPosition(450);
+                //sleep(800);
+         //   }
+            //if (gamepad2.a) {
+                //sleep(2000);
+               // intakeArmMotor.setTargetPosition(-440);
+                //sleep(2000);
+               // leftWristServo.setPosition(1);
+                //rightWristServo.setPosition(1);
+               // sleep(2000);
+           // }
+            if (gamepad1.x) {
+                bucketServo.setPosition(0);
+            }
+            if (gamepad1.b) {
+                bucketServo.setPosition(0.5);
+            }
+            //if (gamepad1.right_bumper) {
+             //   leftClawServo.setPosition(0);
+              //  rightClawServo.setPosition(1);
+           // }
+            //if (gamepad1.left_bumper) {
+               // leftClawServo.setPosition(0.2);
+               // rightClawServo.setPosition(0.8);
+            //}
+            if (gamepad2.right_bumper) {
+                rightSlideMotor.setTargetPosition(2688);
+            }
+            if (gamepad2.left_bumper) {
+                rightSlideMotor.setTargetPosition(0);
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }
