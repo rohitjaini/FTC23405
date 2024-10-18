@@ -107,10 +107,10 @@ public class CORobotCodeLM0_V1 extends LinearOpMode {
 //Linear Slide movement
             //if (gamepad2.y) {
                 //sleep(2000);
-                //rightWristServo.setPosition(0.8);
+            //rightWristServo.setPosition(0.8);
                 //leftWristServo.setPosition(0.8);
                // sleep(2000);
-               // intakeArmMotor.setTargetPosition(450);
+            // intakeArmMotor.setTargetPosition(450);
                 //sleep(800);
          //   }
             //if (gamepad2.a) {
