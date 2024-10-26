@@ -97,7 +97,7 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
 
             if (gamepad1.y) {
                 sleep(1000);
-                intakeArmMotor.setTargetPosition(1);
+                intakeArmMotor.setTargetPosition(-1);
                 sleep(1000);
                 rightWristServo.setPosition(0.28);
                 sleep(1000);
@@ -107,8 +107,14 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
                 sleep(1000);
                 rightWristServo.setPosition(0.5);
                 sleep(1000);
-                intakeArmMotor.setTargetPosition(-30);
+                intakeArmMotor.setTargetPosition(1);
                 sleep(1000);
+            }
+            if (gamepad1.x) {
+                sleep(1000);
+                rightWristServo.setPosition(0.5);
+                sleep(1000);
+                intakeArmMotor.setTargetPosition(0);
             }
             if (gamepad2.y) {
                 bucketServo.setPosition(0.27);
