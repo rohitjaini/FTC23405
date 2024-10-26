@@ -23,7 +23,7 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
         DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
         Servo rightWristServo = hardwareMap.get(Servo.class, "rightWristServo");
-        //Servo specsServo = hardwareMap.get(Servo.class, "specsServo");
+        //Servo specServo = hardwareMap.get(Servo.class, "specServo");
         CRServo activeIntake = hardwareMap.get(CRServo.class, "activeIntake");
         DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "intakeArmMotor");
         //DcMotor hangMotor = hardwareMap.get(DcMotor.class, "hangMotor");
@@ -141,10 +141,10 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
             //if (gamepad2.b) {
             //hangMotor.setPower(-0.5);
             //if (gamepad2.b) {
-                //specsServo.setPosition(1);
+                //specServo.setPosition(1);
             //}
             //if (gamepad2.x) {
-                //specsServo.setPostion(0);
+                //specServo.setPostion(0);
             //}
         }
     }
