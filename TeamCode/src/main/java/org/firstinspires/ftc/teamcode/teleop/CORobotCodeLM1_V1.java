@@ -27,9 +27,13 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
         CRServo activeIntake = hardwareMap.get(CRServo.class, "activeIntake");
         DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "intakeArmMotor");
         Servo bucketServo = hardwareMap.get(Servo.class, "bucketServo");
+        //rightSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //rightSlideMotor.setTargetPosition(0);
+        //rightSlideMotor.setPower(0.3);
+        //rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         intakeArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArmMotor.setTargetPosition(0);
-        intakeArmMotor.setPower(0.3);
+        intakeArmMotor.setPower(0.1);
         intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         telemetry.addLine("Start");
 
@@ -67,6 +71,9 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
+        double armServoReadyPos = 0.43;
+        boolean lock = false;
+
         while (opModeIsActive()) {
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x;
@@ -101,25 +108,29 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
 
 
             if (gamepad1.y) {
+                lock = true;
                 sleep(500);
-                intakeArmMotor.setTargetPosition(355);
+                intakeArmMotor.setTargetPosition(380);
                 sleep(500);
-                rightWristServo.setPosition(0.28);
+                rightWristServo.setPosition(armServoReadyPos);
                 sleep(500);
                 bucketServo.setPosition(0.27);
             }
             if (gamepad1.a) {
                 sleep(500);
+                intakeArmMotor.setTargetPosition(50);
+                rightWristServo.setPosition(0.6);
+                sleep(100);
+                intakeArmMotor.setTargetPosition(70);
+                rightWristServo.setPosition(0.8);
+                sleep(100);
                 rightWristServo.setPosition(0.5);
-                sleep(500);
-                intakeArmMotor.setTargetPosition(-30);
-                sleep(500);
             }
             if (gamepad1.x) {
                 sleep(500);
                 rightWristServo.setPosition(0.5);
                 sleep(500);
-                intakeArmMotor.setTargetPosition(0);
+                intakeArmMotor.setTargetPosition(200);
             }
             if (gamepad2.y) {
                 bucketServo.setPosition(0.27);
@@ -137,9 +148,26 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
                 activeIntake.setPower(1);
             }
 
+            if (gamepad1.dpad_up){
+                if (!lock){
+                    armServoReadyPos = armServoReadyPos + 0.05;
+                    lock = true;
+                }
+            }
+
+            if (gamepad1.dpad_down){
+                if (!lock){
+                    armServoReadyPos = armServoReadyPos - 0.05;
+                    lock = true;
+                }
+            }
+
             double power = gamepad2.left_stick_y;
             rightSlideMotor.setPower(power);
 
+            //if (gamepad2.dpad_up){
+              //  rightSlideMotor.setTargetPosition(624);
+            //}
             if (gamepad2.b) {
                 specServo.setPosition(0.5);
             }
