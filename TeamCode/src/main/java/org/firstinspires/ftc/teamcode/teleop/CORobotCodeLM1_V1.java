@@ -18,15 +18,25 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
         // Declare our motors
         // Make sure your ID's match your configuration
         DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+
         DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+
         DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+
         DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
+
         Servo rightWristServo = hardwareMap.get(Servo.class, "rightWristServo");
+
         Servo specServo = hardwareMap.get(Servo.class, "specServo");
+
         CRServo activeIntake = hardwareMap.get(CRServo.class, "activeIntake");
+
         DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "intakeArmMotor");
+
         Servo bucketServo = hardwareMap.get(Servo.class, "bucketServo");
+
         //rightSlideMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //rightSlideMotor.setTargetPosition(0);
         //rightSlideMotor.setPower(0.3);
@@ -71,7 +81,7 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        double armServoReadyPos = 0.43;
+        double armServoReadyPos = 0.55;
         boolean lock = false;
 
         while (opModeIsActive()) {

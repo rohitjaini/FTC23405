@@ -139,6 +139,7 @@ public class CORobotCodeV6 extends LinearOpMode {
                                                 if (gamepad1.b) {
                                                     telemetry.addLine("b pressed");
                                                     bucketServo.setPosition(0);
+
                                                 }
                                         }
                                     }
