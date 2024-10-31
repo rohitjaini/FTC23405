@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
@@ -27,13 +28,14 @@ public class ObservationZoneAuto extends LinearOpMode {
         intakeArmMotor.setPower(0.3);
         telemetry.addLine("Start");
         intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        waitForStart();
         // Run the code for otos
         frontLeftMotor.setPower(-0.5);
         frontRightMotor.setPower(-0.5);
         backRightMotor.setPower(-0.5);
         backLeftMotor.setPower(-0.5);
-        sleep(1500);
+        sleep(4000);
         frontLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backRightMotor.setPower(0);

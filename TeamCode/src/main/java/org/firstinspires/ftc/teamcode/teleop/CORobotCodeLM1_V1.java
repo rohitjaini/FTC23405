@@ -177,7 +177,7 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
             //  rightSlideMotor.setTargetPosition(624);
             //}
             if (gamepad2.b) {
-                specServo.setPosition(0.5);
+                specServo.setPosition(0);
             }
             if (gamepad2.x) {
                 specServo.setPosition(1);

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous
@@ -27,29 +28,32 @@ public class SpecAuto extends LinearOpMode {
         intakeArmMotor.setPower(0.3);
         telemetry.addLine("Start");
         intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        waitForStart();
         // Run the code for otos
         frontLeftMotor.setPower(-0.5);
         frontRightMotor.setPower(-0.5);
         backRightMotor.setPower(-0.5);
         backLeftMotor.setPower(-0.5);
-        sleep(1500);
+        sleep(1195);
         frontLeftMotor.setPower(0);
         frontRightMotor.setPower(0);
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
-        rightSlideMotor.setPower(0.2);
-        sleep(300);
-        rightSlideMotor.setPower(0);
-        specServo.setPosition(0.3);
-        sleep(300);
-        rightSlideMotor.setPower(-0.05);
-        sleep(300);
-        specServo.setPosition(0.5);
-        sleep(300);
+        rightSlideMotor.setPower(-1);
+        sleep(1250);
         frontLeftMotor.setPower(-0.5);
         frontRightMotor.setPower(-0.5);
         backRightMotor.setPower(-0.5);
         backLeftMotor.setPower(-0.5);
+        sleep(200);
+        rightSlideMotor.setPower(0);
+        specServo.setPosition(1);
+        sleep(1000);
+        rightSlideMotor.setPower(0.05);
+        sleep(300);
+        specServo.setPosition(0);
+        sleep(300);
+
     }
 }
