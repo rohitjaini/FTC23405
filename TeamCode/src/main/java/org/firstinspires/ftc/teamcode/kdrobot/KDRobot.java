@@ -19,12 +19,12 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 public class KDRobot {
-    DcMotorEx armMotor = null;
-    DcMotor frontLeft = null;
-    DcMotor frontRight = null;
-    DcMotor backLeft = null;
-    DcMotor backRight = null;
-    CRServo intakeServo = null;
+    //DcMotorEx armMotor = null;
+    //DcMotor frontLeft = null;
+    //DcMotor frontRight = null;
+    //DcMotor backLeft = null;
+    //DcMotor backRight = null;
+    //CRServo intakeServo = null;
     double driveTrainSpeed;
     int armPosition;
 
@@ -34,11 +34,11 @@ public class KDRobot {
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     public void init(HardwareMap hwMap, Telemetry telemetry) {
-        armMotor = hwMap.get(DcMotorEx.class, "armMotor");
-        frontLeft = hwMap.get(DcMotor.class, "frontLeft");
-        frontRight = hwMap.get(DcMotor.class, "frontRight");
-        backLeft = hwMap.get(DcMotor.class, "backLeft");
-        backRight = hwMap.get(DcMotor.class, "backRight");
+        //armMotor = hwMap.get(DcMotorEx.class, "armMotor");
+        //frontLeft = hwMap.get(DcMotor.class, "frontLeft");
+        //frontRight = hwMap.get(DcMotor.class, "frontRight");
+       // backLeft = hwMap.get(DcMotor.class, "backLeft");
+       // backRight = hwMap.get(DcMotor.class, "backRight");
         //intakeServo = hwMap.get(CRServo.class, "intakeServo");
         this.telemetry = telemetry;
 
@@ -46,7 +46,7 @@ public class KDRobot {
         driveTrainSpeed = 0.1;
         this.setZeroPowerBehavior();
         this.setInitDriveTrainPower();
-        this.initArmMotor();
+        //this.initArmMotor();
         this.setWheelDirection();
         this.initImu(hwMap);
     }
@@ -66,10 +66,10 @@ public class KDRobot {
     }
 
     private void setZeroPowerBehavior() {
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       // frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       // frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+       // backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+     ///   backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     public void setInitDriveTrainPower(){
         this.setWheelPower(0, 0,0, 0);
@@ -91,10 +91,10 @@ public class KDRobot {
     }
 
     private void setWheelDirection(){
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.REVERSE);
+        //frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        //frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
+        //backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        //backRightMotor.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void stopDriveTrain(){
@@ -139,10 +139,10 @@ public class KDRobot {
     }
 
     public void setWheelPower(double frontLeftSpeed, double frontRightSpeed, double backLeftSpeed, double backRightSpeed) {
-        this.frontLeft.setPower(frontLeftSpeed);
-        this.frontRight.setPower(frontRightSpeed);
-        this.backLeft.setPower(backLeftSpeed);
-        this.backRight.setPower(backRightSpeed);
+        //this.frontLeft.setPower(frontLeftSpeed);
+        //this.frontRight.setPower(frontRightSpeed);
+        ///this.backLeft.setPower(backLeftSpeed);
+       // this.backRight.setPower(backRightSpeed);
     }
     public void changeDriveTrainSpeed(String direction){
         switch (direction){
@@ -161,11 +161,11 @@ public class KDRobot {
         switch (direction) {
             case ArmDirection.UP:
                 //sleep(10);
-                this.armPosition = Range.clip(this.armPosition + 3, 0, 550);
+               // this.armPosition = Range.clip(this.armPosition + 3, 0, 550);
                 break;
             case ArmDirection.DOWN:
                 //sleep(10);
-                this.armPosition = Range.clip(this.armPosition  - 3, 0, 550);
+                //this.armPosition = Range.clip(this.armPosition  - 3, 0, 550);
                 break;
         }
         //armMotor.setTargetPosition(this.armPosition);
@@ -180,16 +180,16 @@ public class KDRobot {
     public void setServoPower(String direction) {
         switch (direction) {
             case ServoDirection.INTAKE:
-                this.intakeServo.setPower(1);
+                //this.intakeServo.setPower(1);
                 telemetry.addData("Servo position", "1");
 
                 break;
             case ServoDirection.OUTTAKE:
-                this.intakeServo.setPower(-1);
+                //this.intakeServo.setPower(-1);
                 telemetry.addData("Servo position", "-1");
                 break;
             case ServoDirection.STOP:
-                this.intakeServo.setPower(0);
+               // this.intakeServo.setPower(0);
                 telemetry.addData("Servo position", "0");
                 break;
         }
