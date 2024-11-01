@@ -2,58 +2,112 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous
+@TeleOp
 public class SpecAuto extends LinearOpMode {
+
+    // Declare motors and servos
+    private DcMotor frontLeftMotor;
+    private DcMotor backLeftMotor;
+    private DcMotor frontRightMotor;
+    private DcMotor backRightMotor;
+    private DcMotor rightSlideMotor;
+    private Servo rightWristServo;
+    private Servo specServo;
+    private CRServo activeIntake;
+    private DcMotor intakeArmMotor;
+    private Servo bucketServo;
+
     @Override
     public void runOpMode() throws InterruptedException {
-        // Declare our motors
-        // Make sure your ID's match your configuration
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        DcMotor rightSlideMotor = hardwareMap.get(DcMotor.class, "rightSlideMotor");
-        Servo rightWristServo = hardwareMap.get(Servo.class, "rightWristServo");
-        Servo specServo = hardwareMap.get(Servo.class, "specServo");
-        CRServo activeIntake = hardwareMap.get(CRServo.class, "activeIntake");
-        DcMotor intakeArmMotor = hardwareMap.get(DcMotor.class, "intakeArmMotor");
-        Servo bucketServo = hardwareMap.get(Servo.class, "bucketServo");
+        // Initialize hardware
+        frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+        backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+        backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        rightSlideMotor = hardwareMap.dcMotor.get("rightSlideMotor");
+        rightWristServo = hardwareMap.servo.get("rightWristServo");
+        specServo = hardwareMap.servo.get("specServo");
+        activeIntake = hardwareMap.crservo.get("activeIntake");
+        intakeArmMotor = hardwareMap.dcMotor.get("intakeArmMotor");
+        bucketServo = hardwareMap.servo.get("bucketServo");
+
+        // Initialize motors
         intakeArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArmMotor.setTargetPosition(0);
         intakeArmMotor.setPower(0.3);
-        telemetry.addLine("Start");
+
         intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        printTelemetry("Waiting for start...");
         waitForStart();
-        // Run the code for otos
-        frontLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        sleep(1195);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(0);
-        backRightMotor.setPower(0);
-        backLeftMotor.setPower(0);
-        rightSlideMotor.setPower(-1);
-        sleep(1250);
-        frontLeftMotor.setPower(-0.5);
-        frontRightMotor.setPower(-0.5);
-        backRightMotor.setPower(-0.5);
-        backLeftMotor.setPower(-0.5);
-        sleep(200);
-        rightSlideMotor.setPower(0);
-        specServo.setPosition(1);
-        sleep(1000);
-        rightSlideMotor.setPower(0.05);
-        sleep(300);
-        specServo.setPosition(0);
+
+        // Drive backwards from wall
+        printTelemetry("Driving backwards from wall");
+        driveMotors(-0.5, 600);
+
+        sleep(500);
+
+        // Arm out for slides
+        printTelemetry("Arm moving out for slides");
+        intakeArmMotor.setTargetPosition(300);
+        sleep(1000); // Wait for arm to reach position
+
+        waitForInput();
+        // Slides up
+        printTelemetry("Slides moving up");
+        rightSlideMotor.setPower(-0.5);
+        sleep(3000); // Wait for slides to move up
+
+        // Drive back
+        printTelemetry("Driving back");
+        driveMotors(-0.5, 200);
+
+        // Slides down and activate spec
+        printTelemetry("Slides Down");
+        rightSlideMotor.setPower(0.5);
+        sleep(500);
+        specServo.setPosition(0.8);
+        sleep(100);
+        specServo.setPosition(0.2);
         sleep(300);
 
+        // Drive away from sub (forward)
+        driveMotors(0.5, 300);
+    }
+
+    // Method to drive motors
+    private void driveMotors(double speed, int duration) {
+        DcMotor[] driveMotors = {frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor};
+        for (DcMotor motor : driveMotors) {
+            motor.setPower(speed);
+        }
+        sleep(duration);
+        for (DcMotor motor : driveMotors) {
+            motor.setPower(0);
+        }
+    }
+
+    // Method to print telemetry
+    private void printTelemetry(String message) {
+        telemetry.setAutoClear(false);
+        telemetry.addLine(message);
+        telemetry.update();
+    }
+
+    private void waitForInput(){
+        printTelemetry("Waiting for gamepad1.a");
+        while (true){
+            if (gamepad1.a){
+                return;
+            }
+            sleep(100);
+        }
     }
 }
