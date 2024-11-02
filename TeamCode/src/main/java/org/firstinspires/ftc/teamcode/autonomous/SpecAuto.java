@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp
+@Autonomous
 public class SpecAuto extends LinearOpMode {
 
     // Declare motors and servos
@@ -48,7 +48,15 @@ public class SpecAuto extends LinearOpMode {
         printTelemetry("Waiting for start...");
         waitForStart();
 
+
+
+
+
         // Drive backwards from wall
+
+        printTelemetry("Closing Spec Servo");
+        specServo.setPosition(0.8);
+
         printTelemetry("Driving backwards from wall");
         driveMotors(-0.5, 600);
 
@@ -56,30 +64,45 @@ public class SpecAuto extends LinearOpMode {
 
         // Arm out for slides
         printTelemetry("Arm moving out for slides");
+        rightSlideMotor.setPower(-0.5);
+        sleep(500);
         intakeArmMotor.setTargetPosition(300);
-        sleep(1000); // Wait for arm to reach position
+        sleep(1000);
+        rightSlideMotor.setPower(0.5);
+        sleep(800);
+
 
         waitForInput();
         // Slides up
         printTelemetry("Slides moving up");
         rightSlideMotor.setPower(-0.5);
-        sleep(3000); // Wait for slides to move up
+        sleep(3700); // Wait for slides to move up
+        rightSlideMotor.setPower(-0.15); //holding power hopefully?
 
         // Drive back
         printTelemetry("Driving back");
         driveMotors(-0.5, 200);
 
-        // Slides down and activate spec
+        // Slides down to put spec on bar
         printTelemetry("Slides Down");
         rightSlideMotor.setPower(0.5);
-        sleep(500);
-        specServo.setPosition(0.8);
-        sleep(100);
+        sleep(300);
+
+        // Spec should be on bar so open servo
+        printTelemetry("Servo Open");
         specServo.setPosition(0.2);
         sleep(300);
 
-        // Drive away from sub (forward)
+        // Drive away from submersible (forward)
+        printTelemetry("Driving Away");
         driveMotors(0.5, 300);
+
+        printTelemetry("Placing Intake on ground");
+        intakeArmMotor.setPower(0.1);
+        rightWristServo.setPosition(0.58);
+        intakeArmMotor.setTargetPosition(440);
+//        sleep(5000);
+
     }
 
     // Method to drive motors
@@ -102,12 +125,12 @@ public class SpecAuto extends LinearOpMode {
     }
 
     private void waitForInput(){
-        printTelemetry("Waiting for gamepad1.a");
-        while (true){
-            if (gamepad1.a){
-                return;
-            }
-            sleep(100);
-        }
+//        printTelemetry("Waiting for gamepad1.a");
+//        while (true){
+//            if (gamepad1.a){
+//                return;
+//            }
+//            sleep(100);
+//        }
     }
 }

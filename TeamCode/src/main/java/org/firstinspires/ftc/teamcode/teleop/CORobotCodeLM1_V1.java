@@ -43,7 +43,7 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
         //rightSlideMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         intakeArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intakeArmMotor.setTargetPosition(0);
-        intakeArmMotor.setPower(0.1);
+        intakeArmMotor.setPower(0.3);
         intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         telemetry.addLine("Start");
 
@@ -72,12 +72,29 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
         imu.initialize(parameters);
 
         waitForStart();
+//        rightSlideMotor.setPower(-0.5);
+//        sleep(500);
+//        intakeArmMotor.setTargetPosition(300);
+//        sleep(1000);
+//        rightSlideMotor.setPower(0);
+//        sleep(500);
+
         rightSlideMotor.setPower(-0.5);
-        sleep(500);
+        sleep(3000);
+        rightSlideMotor.setPower(-0.2);
+        rightWristServo.setPosition(0.1);
+        sleep(1000);
+        intakeArmMotor.setTargetPosition(-420); //reset arm into position to make sure that existing teleop works
+        sleep(1500);
+        intakeArmMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); //reset encoder for teleop
+        intakeArmMotor.setTargetPosition(0);
+        intakeArmMotor.setPower(0.2);
+        intakeArmMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         intakeArmMotor.setTargetPosition(300);
         sleep(1000);
-        rightSlideMotor.setPower(0);
-        sleep(500);
+
+
+
         bucketServo.setPosition(0.27);
 
 
@@ -121,6 +138,8 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
 
             if (gamepad1.y) {
                 lock = true;
+                intakeArmMotor.setTargetPosition(300);
+                sleep(200);
                 intakeArmMotor.setTargetPosition(380);
                 sleep(500);
                 rightWristServo.setPosition(armServoReadyPos);
@@ -182,6 +201,18 @@ public class CORobotCodeLM1_V1 extends LinearOpMode {
             if (gamepad2.x) {
                 specServo.setPosition(0.8);
             }
+        }
+
+
+    }
+
+    private void waitForInput(){
+//            printTelemetry("Waiting for gamepad1.a");
+        while (true){
+            if (gamepad1.a){
+                return;
+            }
+            sleep(100);
         }
     }
 }
